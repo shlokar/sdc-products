@@ -1,8 +1,9 @@
 let db = require('../db/db.js');
 
-const queryTest = () => {
-  return db.query(`select name from products where id = 1`,
-  )
-};
+const readAllProducts = (page, count) => {
+  const text = 'select * from products offset $1 limit $2';
+  const values = [(count * (page - 1)), count];
+  return db.query(text, values);
+}
 
-module.exports.queryTest = queryTest;
+module.exports = { readAllProducts };
