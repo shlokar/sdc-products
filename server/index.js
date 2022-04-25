@@ -27,13 +27,16 @@ app.get('/products/:product_id/styles', (req, res) => {
       res.status(200).send(stylesObj);
     })
     .catch((err) => res.sendStatus(500));
-    // .catch(err => console.log(err))
 });
 
 // Related products
 app.get('/products/:product_id/related', (req, res) => {
   models.readRelatedProducts(req.params.product_id)
-    .then(res => console.log(res.rows))
+    .then((related) => {
+      const relatedProducts = related.rows.map((rp) => rp.related_prod_id)
+      res.status(200).send(relatedProducts);
+    })
+    .catch((err) => res.sendStatus(500));
 })
 
 app.listen(port, () => {
