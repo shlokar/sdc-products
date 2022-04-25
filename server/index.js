@@ -16,6 +16,24 @@ app.get('/products/:product_id', (req, res) => {
   models.readProductInfo(req.params.product_id)
     .then((product) => res.status(200).send(product.rows[0]))
     .catch((err) => res.sendStatus(500));
+});
+
+// Product styles
+app.get('/products/:product_id/styles', (req, res) => {
+  const stylesObj = {product_id: req.params.product_id};
+  models.readProductStyles(req.params.product_id)
+    .then((styles) => {
+      stylesObj.results = styles.rows;
+      res.status(200).send(stylesObj);
+    })
+    .catch((err) => res.sendStatus(500));
+    // .catch(err => console.log(err))
+});
+
+// Related products
+app.get('/products/:product_id/related', (req, res) => {
+  models.readRelatedProducts(req.params.product_id)
+    .then(res => console.log(res.rows))
 })
 
 app.listen(port, () => {
