@@ -60,3 +60,9 @@ CREATE TABLE IF NOT EXISTS Related_Products (
     FOREIGN KEY(curr_prod_id)
       REFERENCES Products(id)
 );
+
+CREATE INDEX prod_id_in_features ON features (product_id);
+CREATE INDEX prod_id_in_styles ON styles (product_id);
+CREATE INDEX prod_id_in_rp  ON related_products (curr_prod_id);
+CREATE INDEX style_id_in_photos ON photos (style_id);
+CREATE INDEX style_id_in_skus ON skus (style_id);
