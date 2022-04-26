@@ -54,11 +54,7 @@ const readProductStyles = (product_id) => {
         WHERE sk.style_id = s.style_id
       ) skus
     FROM styles s
-    WHERE s.style_id IN (
-      SELECT s.style_id
-      FROM styles s
-      WHERE s.product_id = ${product_id}
-    )
+    WHERE s.product_id = ${product_id}
     ORDER BY s.style_id
   `;
   return db.query(query);
