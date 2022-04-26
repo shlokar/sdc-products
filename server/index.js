@@ -32,10 +32,7 @@ app.get('/products/:product_id/styles', (req, res) => {
 // Related products
 app.get('/products/:product_id/related', (req, res) => {
   models.readRelatedProducts(req.params.product_id)
-    .then((related) => {
-      const relatedProducts = related.rows.map((rp) => rp.related_prod_id)
-      res.status(200).send(relatedProducts);
-    })
+    .then((related) => res.status(200).send(related.rows[0].related_products))
     .catch((err) => res.sendStatus(500));
 })
 

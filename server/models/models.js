@@ -62,7 +62,7 @@ const readProductStyles = (product_id) => {
 
 const readRelatedProducts = (product_id) => {
   const query = `
-    SELECT related_prod_id
+    SELECT json_agg(related_prod_id) related_products
     FROM related_products
     WHERE curr_prod_id = ${product_id}
   `;
