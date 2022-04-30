@@ -4,6 +4,10 @@ const models = require('./models/models.js');
 const app = express();
 const port = 3000;
 
+app.get('/loaderio-c5fe8956c3bb7900674f5d43c35d6250', (req, res) => {
+  res.send('loaderio-c5fe8956c3bb7900674f5d43c35d6250');
+});
+
 // List products
 app.get('/products', (req, res) => {
   models.readAllProducts(req.query.page || 1, req.query.count || 5)
